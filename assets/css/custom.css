@@ -1,0 +1,27 @@
+/*
+Custom Css
+*/
+.img-logo {
+    width: 70px;
+    height: auto;
+}
+
+.sticky-top {
+   background-color: #fff;
+}
+
+#templatemo_main_nava {
+   box-shadow: 0 .1rem 0.8rem rgba(238, 125, 45, 0) !important;
+}
+
+.btn{
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+.btn:hover {
+  background-color: #17adac;
+  color: #000000;
+}
+
+#templatemo_main_nav a:hover {
+  color: #000000;
+}   

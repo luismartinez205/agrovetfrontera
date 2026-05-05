@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Cinta Metrica TRUPER",
+      "price": 19.99,
+      "category": "herramientas",
+      "detail": "10m / 33ft",
+      "stock": 50,
+      "image": "https://mafesapanama.com/wp-content/uploads/2025/06/10305720800x80020-20SAP.jpg",
+      "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 2,
+      "name": "Cinta Metrica KOMELON",
+      "price": 16.99,
+      "category": "herramientas",
+      "detail": "8m / 26ft",
+      "stock": 30,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn3d1wP1hS1HKqlLiYJi4bUecdRU2_B6-LpQ&s",
+      "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 3,
+      "name": "Marillo Magnetico TOTAL",
+      "price": 24.99,
+      "category": "herramientas",
+      "detail": "16 oz / 450g",
+      "stock": 20,
+      "image": "https://herramientastotal.cl/cdn/shop/files/THCH61016L_1024x1024.jpg?v=1726164159",
+      "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 4,
+      "name": "Rotomartillo TOTAL",
+      "price": 84.99,
+      "category": "herramientas",
+      "detail": "20m / 66ft",
+      "stock": 10,
+      "image": "https://carbonestore.com/cdn/shop/files/243_UTH1153226-2_1024x.jpg?v=1725977671",
+      "description": "Cinta métrica de calidad"
+    }
+  ]
+}

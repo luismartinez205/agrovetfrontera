@@ -5,6 +5,7 @@ const zoomResult = document.getElementById("zoomResult");
 const img = document.getElementById("mainImage") || document.getElementById("product-detail");
 const filterButton = document.querySelector(".filter");
 const categorySidebar = document.querySelector(".col-lg-3");
+const productList = document.getElementById("product-list");
 
 filterButton?.addEventListener("click", () => {
   if (categorySidebar) {
@@ -148,13 +149,74 @@ function moveLens(e) {
 }
 
 const categoria = "Zapatos";
+const breadcrumbElement = document.getElementById("breadcrumb");
+if (breadcrumbElement) {
+  breadcrumbElement.innerHTML = `
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/productos">Productos</a></li>
+        <li class="breadcrumb-item active">${categoria}</li>
+      </ol>
+    </nav>
+  `;
+}
 
-document.getElementById("breadcrumb").innerHTML = `
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-      <li class="breadcrumb-item"><a href="/productos">Productos</a></li>
-      <li class="breadcrumb-item active">${categoria}</li>
-    </ol>
-  </nav>
-`;
+if (window.location.pathname.endsWith('shop.html') && productList) {
+  fetch("./product.json")
+    .then(res => res.json())
+    .then(data => {
+      mostrarProductos(data.products);
+    })
+    .catch(error => {
+      console.error('Error cargando product.json:', error);
+    });
+}
+
+function mostrarProductos(products) {
+  if (!productList) return;
+
+  productList.innerHTML = '';
+
+  products.forEach(product => {
+    productList.innerHTML += `
+      <div class="col-md-3">
+        <div class="card mb-4 product-wap rounded-0">
+          <div class="card rounded-0">
+            <img class="card-img rounded-0 img-fluid" src="${product.image}" alt="${product.name}">
+            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+              <ul class="list-unstyled">
+                <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
+                <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
+                <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body">
+            <a href="shop-single.html" class="h3 text-decoration-none">${product.name}</a>
+            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+              <li class="text-muted">${product.detail}</li>
+              <li class="pt-2">
+                <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+              </li>
+            </ul>
+            <ul class="list-unstyled d-flex justify-content-center mb-1">
+              <li>
+                <i class="text-warning fa fa-star"></i>
+                <i class="text-warning fa fa-star"></i>
+                <i class="text-warning fa fa-star"></i>
+                <i class="text-muted fa fa-star"></i>
+                <i class="text-muted fa fa-star"></i>
+              </li>
+            </ul>
+            <p class="text-center mb-0">$${product.price.toFixed(2)}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  applyShopImageLinks();
+}

@@ -7,6 +7,34 @@ const filterButton = document.querySelector(".filter");
 const categorySidebar = document.querySelector(".col-lg-3");
 const productList = document.getElementById("product-list");
 
+let allProducts = [];
+
+fetch("./product.json")
+  .then(res => res.json())
+  .then(data => {
+    allProducts = data.products;
+    populateSuggestions();
+  })
+  .catch(() => {
+    // Si no existe, no hacer nada
+  });
+
+function populateSuggestions() {
+  const datalist = document.getElementById('searchSuggestions');
+  if (!datalist) return;
+  const suggestions = new Set();
+  allProducts.forEach(p => {
+    suggestions.add(p.name);
+    suggestions.add(p.detail);
+  });
+  datalist.innerHTML = '';
+  suggestions.forEach(s => {
+    const option = document.createElement('option');
+    option.value = s;
+    datalist.appendChild(option);
+  });
+}
+
 filterButton?.addEventListener("click", () => {
   if (categorySidebar) {
     const isVisible = categorySidebar.style.display === "block";
@@ -57,11 +85,13 @@ function buildShopSingleUrl(imgEl) {
   const imageSrc = imgEl.src;
   const productName = productCard.querySelector('.card-body a.h3')?.textContent.trim();
   const productPrice = productCard.querySelector('.card-body p.text-center')?.textContent.trim();
+  const productCode = imgEl.dataset.code;
 
   const url = new URL('shop-single.html', window.location.href);
   url.searchParams.set('img', imageSrc);
   if (productName) url.searchParams.set('name', productName);
   if (productPrice) url.searchParams.set('price', productPrice);
+  if (productCode) url.searchParams.set('code', productCode);
 
   return url.toString();
 }
@@ -94,14 +124,20 @@ function loadProductFromQuery() {
   const priceParam = query.get('price');
 
   const productDetail = document.getElementById('product-detail');
-  const titleEl = document.querySelector('.card-body h1.h2');
-  const priceEl = document.querySelector('.card-body p.h3.py-2');
+  const titleEl = document.querySelector('.card-body .h2');
+  const priceEl = document.querySelector('.card-body .h3.py-2');
+  const codeEl = document.getElementById('code');
   const brandDisplay = document.getElementById('brand-display');
 
   if (imageParam && productDetail) {
     productDetail.src = imageParam;
     if (nameParam) productDetail.alt = nameParam;
     if (zoomResult) updateZoom(imageParam);
+  }
+
+  if (codeEl) {
+    const code = query.get('code') ;
+    codeEl.textContent = code;
   }
 
   if (nameParam && titleEl) {
@@ -148,14 +184,14 @@ function moveLens(e) {
   zoomResult.style.backgroundPosition = `${percentX}% ${percentY}%`;
 }
 
-const categoria = "Zapatos";
+const categoria = "" + document.title.split(" - ")[0].trim();
 const breadcrumbElement = document.getElementById("breadcrumb");
 if (breadcrumbElement) {
   breadcrumbElement.innerHTML = `
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="/productos">Productos</a></li>
+        <li class="breadcrumb-item"><a href="/productos">Departamentos</a></li>
         <li class="breadcrumb-item active">${categoria}</li>
       </ol>
     </nav>
@@ -166,7 +202,13 @@ if (window.location.pathname.endsWith('shop.html') && productList) {
   fetch("./product.json")
     .then(res => res.json())
     .then(data => {
-      mostrarProductos(data.products);
+      let products = data.products;
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q');
+      if (query) {
+        products = products.filter(p => p.name.toLowerCase().includes(query.toLowerCase()) || p.detail.toLowerCase().includes(query.toLowerCase()));
+      }
+      mostrarProductos(products);
     })
     .catch(error => {
       console.error('Error cargando product.json:', error);
@@ -183,7 +225,7 @@ function mostrarProductos(products) {
       <div class="col-md-3">
         <div class="card mb-4 product-wap rounded-0">
           <div class="card rounded-0">
-            <img class="card-img rounded-0 img-fluid" src="${product.image}" alt="${product.name}">
+            <img class="card-img rounded-0 img-fluid" src="${product.image}" alt="${product.name}" data-code="${product.code}">
             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
               <ul class="list-unstyled">
                 <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
@@ -219,4 +261,15 @@ function mostrarProductos(products) {
   });
 
   applyShopImageLinks();
+
+  const itemsLabel = document.getElementById('items');
+  if (itemsLabel) {
+    itemsLabel.textContent = `Herramientas (${products.length})`;
+  }
 }
+
+document.getElementById('searchForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const q = document.getElementById('inputModalSearch').value;
+  window.location.href = 'shop.html?q=' + encodeURIComponent(q);
+});

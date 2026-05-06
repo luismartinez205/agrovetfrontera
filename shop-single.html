@@ -114,13 +114,14 @@ https://templatemo.com/tm-559-zay-shop
             <div class="w-100 pt-1 mb-5 text-right">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <form id="searchForm" action="" method="get" class="modal-content modal-body border-0 p-0">
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ..." list="searchSuggestions">
                     <button type="submit" class="input-group-text bg-success text-light">
                         <i class="fa fa-fw fa-search text-white"></i>
                     </button>
                 </div>
+                <datalist id="searchSuggestions"></datalist>
             </form>
         </div>
     </div>
@@ -237,8 +238,8 @@ https://templatemo.com/tm-559-zay-shop
                                <!-- Preview -->
                     <div class="zoom-result" id="zoomResult"></div>
                             
-                            <h1 class="h2">Active Wear</h1>
-                            <p class="h3 py-2 fs-1 text-green">$25.00</p>
+                            <h1 class="h2"></h1>
+                            <p class="h3 py-2 fs-1 text-green"></p>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -252,12 +253,12 @@ https://templatemo.com/tm-559-zay-shop
                                     <h6>Marca:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong id="brand-display">marca</strong></p>
+                                    <p class="text-muted"><strong id="brand-display"></strong></p>
                                 </li>
                             </ul>
 
                             <h6>Codigo:</h6>
-                            <p>SKU THCH61016L</p>
+                            <p id="code"></p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <h6>Colores Disponibles :</h6>
@@ -268,7 +269,7 @@ https://templatemo.com/tm-559-zay-shop
                             </ul>
 
                             <h6>Lo que tienes que saber:</h6>
-                            <ul class="list-unstyled pb-3">
+                            <ul class="pb-3">
                                 <li>Ideal para trabajos de carpintería y construcción.</li>
                                 <li>Ofrece un golpe potente y preciso.</li>
                                 <li>Cuenta con función magnética para colocación de clavos.</li>

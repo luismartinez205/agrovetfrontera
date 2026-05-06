@@ -7,6 +7,7 @@
       "category": "herramientas",
       "detail": "10m / 33ft",
       "stock": 50,
+      "code": "SKU THCH61016Z",
       "image": "https://mafesapanama.com/wp-content/uploads/2025/06/10305720800x80020-20SAP.jpg",
       "description": "Cinta métrica de calidad"
     },
@@ -17,16 +18,18 @@
       "category": "herramientas",
       "detail": "8m / 26ft",
       "stock": 30,
+      "code": "SKU THCH61016W",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn3d1wP1hS1HKqlLiYJi4bUecdRU2_B6-LpQ&s",
       "description": "Cinta métrica de calidad"
     },
     {
       "id": 3,
-      "name": "Marillo Magnetico TOTAL",
-      "price": 24.99,
+      "name": "Martillo Magnetico TOTAL",
+      "price": 14.99,
       "category": "herramientas",
       "detail": "16 oz / 450g",
       "stock": 20,
+      "code": "SKU THCH61016S",
       "image": "https://herramientastotal.cl/cdn/shop/files/THCH61016L_1024x1024.jpg?v=1726164159",
       "description": "Cinta métrica de calidad"
     },
@@ -35,10 +38,56 @@
       "name": "Rotomartillo TOTAL",
       "price": 84.99,
       "category": "herramientas",
-      "detail": "20m / 66ft",
+      "detail": "1500W, 2.5J",
       "stock": 10,
+      "code": "SKU THCH61016M",
       "image": "https://carbonestore.com/cdn/shop/files/243_UTH1153226-2_1024x.jpg?v=1725977671",
       "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 5,
+      "name": "Sierra Circular TOTAL",
+      "price": 129.99,
+      "category": "herramientas",
+      "detail": "1400W, 185mm",
+      "stock": 15,
+      "code": "SKU THCH61016C",
+      "image": "https://carbonestore.com/cdn/shop/files/171_UTS11418526-2_1024x.jpg?v=1726253564",
+      "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 6,
+      "name": "Nivel de precisión DELI",
+      "price": 12.99,
+      "category": "herramientas",
+      "detail": "Con 3 burbujas, 60cm",
+      "stock": 25,
+      "code": "SKU THCH61Q016DG",
+      "image": "https://ae-pic-a1.aliexpress-media.com/kf/Sa38468b794e041ddae0cc0c38c92664d8.jpg",
+      "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 7,
+      "name": "Palaustre ABS ",
+      "price": 24.99,
+      "category": "herramientas",
+      "detail": "Hoja de acero, 16cm",
+      "stock": 18,
+      "code": "SKU THCH61016D",
+      "image": "https://www.ferreteriasuprema.com/cdn/shop/products/PaletadealbanileriadeABSyacero_1200x1200.jpg?v=1610553127",
+      "description": "Cinta métrica de calidad"
+    },
+    {
+      "id": 8,
+      "name": "Mazo de herrero BELLOTA",
+      "price": 9.99,
+      "category": "herramientas",
+      "detail": "Mango de madera, 25mm",
+      "stock": 40,
+      "code": "SGHYU61016M",
+      "image": "https://ferreteriadelicias.com/13379-home_default/martillo-ebanista-mango-madera-haya-certificada-25mm-bellota-8005d.jpg",
+      "description": "Cinta métrica de calidad"
     }
+
   ]
 }

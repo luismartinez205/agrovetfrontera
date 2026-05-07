@@ -7,7 +7,7 @@ Custom Css
 }
 
 .sticky-top {
-   background-color: #fff;
+   background-color: #212934;
 }
 
 #templatemo_main_nava {
@@ -75,8 +75,8 @@ Custom Css
 }
 
 .col-lg-3 {
-    display: block;
-    background-color: #17adac;
+    display: none;
+    background-color: #2129340d;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -87,3 +87,65 @@ Custom Css
       display: inline-flex;
     gap: 109px;
 }
+
+
+    .price-filter{
+      width:243px;
+      
+      padding:25px;
+      border-radius:10px;
+     
+    }
+
+    .price-filter h3{
+          margin-bottom: 25px;
+    font-size: 14px;
+    text-align: center;
+    }
+
+    .slider{
+      position:relative;
+      height:6px;
+      background:#ddd;
+      border-radius:10px;
+    }
+
+    .progress{
+      position:absolute;
+      height:100%;
+      background:black;
+      border-radius:10px;
+      left:20%;
+      right:20%;
+    }
+
+    .range-input{
+      position:relative;
+    }
+
+    .range-input input{
+      position:absolute;
+      width:100%;
+      top:-11px;
+      background:none;
+      pointer-events:none;
+      appearance:none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb{
+      height:18px;
+      width:18px;
+      border-radius:50%;
+      background:black;
+      pointer-events:auto;
+      appearance:none;
+      cursor:pointer;
+      border:none;
+    }
+
+    .price{
+      margin-top:18px;
+      text-align:center;
+      color:#777;
+      font-size:18px;
+    }

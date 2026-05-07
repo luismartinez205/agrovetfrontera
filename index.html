@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/amazon-search.css">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
@@ -77,18 +78,32 @@ https://templatemo.com/tm-559-zay-shop
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
+                <div class="navbar align-self-center d-flex flex-column flex-lg-row w-100">
+                    <!-- Amazon-style search bar -->
+                    <div class="search-bar-container d-none d-lg-flex align-items-center flex-grow-1 mx-2">
+                        <div class="search-bar-wrapper">
+                            <select class="search-category" id="searchCategory">
+                                <option value="">Todas las categorias</option>
+                                <option value="name">Por nombre</option>
+                                <option value="detail">Por descripcion</option>
+                            </select>
+                            <div class="search-input-group">
+                                <input type="text" class="search-input" id="searchInputNavbar" placeholder="Que estas buscando?" autocomplete="off" list="navbarSearchSuggestions">
+                                <datalist id="navbarSearchSuggestions"></datalist>
+                                <button type="submit" class="search-button" id="searchButtonNavbar">
+                                    <i class="fa fa-fw fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Buscar...">
                             <div class="input-group-text">
                                 <i class="fa fa-fw fa-search"></i>
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
                     <a class="nav-icon position-relative text-decoration-none" href="shop-single.html">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-green text-dark">0</span>
@@ -104,22 +119,7 @@ https://templatemo.com/tm-559-zay-shop
     </nav>
     <!-- Close Header -->
     
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Buscar Productos ...">
-                    <button type="submit" class="input-group-text bg-green text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+
 
 
 
@@ -154,7 +154,7 @@ https://templatemo.com/tm-559-zay-shop
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/perro.jpg" alt="">
+                            <img class="img-fluid" src="./assets/img/2000_681d293f5442d.png" alt="">
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
@@ -422,6 +422,7 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/amazon-search.js"></script>
     <!-- End Script -->
 </body>
 

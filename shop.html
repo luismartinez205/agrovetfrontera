@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="https://files.cdn-files-a.com/uploads/3883651/400_6818cc086bf5d.png?aspect_ratio=1:1&width=48&format=png">
+
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/amazon-search.css">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet"
@@ -83,28 +85,41 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
+                <div class="navbar align-self-center d-flex flex-column flex-lg-row w-100">
+                    <!-- Amazon-style search bar -->
+                    <div class="search-bar-container d-none d-lg-flex align-items-center flex-grow-1 mx-2">
+                        <div class="search-bar-wrapper">
+                            <select class="search-category" id="searchCategory">
+                                <option value="">Todas las categorías</option>
+                                <option value="name">Por nombre</option>
+                                <option value="detail">Por descripción</option>
+                            </select>
+                            <div class="search-input-group">
+                                <input type="text" class="search-input" id="searchInputNavbar" placeholder="¿Qué estás buscando?" autocomplete="off" list="navbarSearchSuggestions">
+                                <datalist id="navbarSearchSuggestions"></datalist>
+                                <button type="submit" class="search-button" id="searchButtonNavbar">
+                                    <i class="fa fa-fw fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Buscar...">
                             <div class="input-group-text">
                                 <i class="fa fa-fw fa-search"></i>
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
-                        data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
                     <a class="nav-icon position-relative text-decoration-none" href="shop-single.html">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <i class="fa fa-fw fa-cart-arrow-down text-light mr-1"></i>
                         <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-green text-dark">0</span>
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-orange">0</span>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <i class="fa fa-fw fa-user text-light mr-3"></i>
                         <span
-                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-green text-dark">0</span>
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-orange">0</span>
                     </a>
                 </div>
             </div>
@@ -114,29 +129,13 @@
     <!-- Close Header -->
 
     <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="searchForm" action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ..." list="searchSuggestions">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-                <datalist id="searchSuggestions"></datalist>
-            </form>
-        </div>
-    </div>
+
 
 
 
     <!-- Start Content -->
     <div class="container py-5">
-        <div class="row">
+        <div class="row justify-content-center">
 
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Departamentos</h1>
@@ -173,6 +172,26 @@
                         </ul>
                     </li>
                 </ul>
+                <div class="price-filter">
+
+    <h3>Rangos de precio</h3>
+
+    <div class="slider">
+      <div class="progress"></div>
+    </div>
+
+    <div class="range-input">
+      <input type="range" class="range-min" min="0" max="1000000" value="150000" step="1000">
+      <input type="range" class="range-max" min="0" max="1000000" value="1171493" step="1000">
+    </div>
+
+    <div class="price">
+      $ <span id="min-price">0</span>
+      -
+      $ <span id="max-price">295</span>
+    </div>
+
+  </div>
             </div>
 
             <div class="col-lg-9">
@@ -189,13 +208,12 @@
                         </li>
                     </ol>
                 </nav>
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-md-6">
                         <ul class="list-inline shop-top-menu pb-3 pt-1">
                             <li class="list-inline-item">
                                 <p class="h3 text-dark text-decoration-none mr-3" id="items"></p>
-                                <p class="filter">Mostrar Filtros <i class="fa-solid fa-sliders"
-                                        style="color: rgb(6, 6, 6);"></i></p>
+                                <p class="filter"></p>
                             </li>
 
                         </ul>
@@ -242,10 +260,9 @@
         <div class="container my-4">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Our Brands</h1>
+                    <h1 class="h1">Nuestras Marcas</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        Lorem ipsum dolor sit amet.
+                        Descubre las mejores marcas de productos para tu hogar y negocio.
                     </p>
                 </div>
                 <div class="col-lg-9 m-auto tempaltemo-carousel">
@@ -270,19 +287,19 @@
                                         <div class="row">
                                             <div class="col-3 p-md-5">
                                                 <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1MR-Y1GqbL-ltMfnN8mJt4Fp8iI-982Jmlw&s" alt="Brand Logo"></a>
                                             </div>
                                             <div class="col-3 p-md-5">
                                                 <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_02.png" alt="Brand Logo"></a>
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRupgk1fqmtcJn9X_VVtwvZoSErTyDjwfZbHQ&s" alt="Brand Logo"></a>
                                             </div>
                                             <div class="col-3 p-md-5">
                                                 <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_03.png" alt="Brand Logo"></a>
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIBKRoFtpEVP_qpPMEz_pkhkSWk0eB-n1fqQ&s" alt="Brand Logo"></a>
                                             </div>
                                             <div class="col-3 p-md-5">
                                                 <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_04.png" alt="Brand Logo"></a>
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlc4hX1HKJWHw-ShxRxQAfN8j-LcRnyYZkOg&s" alt="Brand Logo"></a>
                                             </div>
                                         </div>
                                     </div>
@@ -293,7 +310,7 @@
                                         <div class="row">
                                             <div class="col-3 p-md-5">
                                                 <a href="#"><img class="img-fluid brand-img"
-                                                        src="assets/img/brand_01.png" alt="Brand Logo"></a>
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6dpoQKstqvVnOxWd_Opq3116BylRaGkBxGQ&s" alt="Brand Logo"></a>
                                             </div>
                                             <div class="col-3 p-md-5">
                                                 <a href="#"><img class="img-fluid brand-img"
@@ -361,19 +378,19 @@
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <img src="./assets/img/logo.webp" alt="" class="img-logo">
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
-                            123 Consectetur at ligula 10660
+                           Guabito, Frontera Bocas Del Toro PANAMA.
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                            <a class="text-decoration-none" href="tel:010-020-0340">005077605199</a>
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                            <a class="text-decoration-none" href="mailto:info@company.com">agroveterinariaf@gmail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -444,9 +461,9 @@
                 <div class="row pt-2">
                     <div class="col-12">
                         <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name
-                            | Designed by <a rel="sponsored" href="https://templatemo.com"
-                                target="_blank">TemplateMo</a>
+                            Copyright &copy; 2026 Agrovet Frontera
+                            | Designed by Graphenix Studio 
+                                
                         </p>
                     </div>
                 </div>
@@ -462,6 +479,7 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/amazon-search.js"></script>
     <!-- End Script -->
 </body>
 

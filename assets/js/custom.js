@@ -209,6 +209,7 @@ if (window.location.pathname.endsWith('shop.html') && productList) {
         products = products.filter(p => p.name.toLowerCase().includes(query.toLowerCase()) || p.detail.toLowerCase().includes(query.toLowerCase()));
       }
       mostrarProductos(products);
+      initPriceFilter(products);
     })
     .catch(error => {
       console.error('Error cargando product.json:', error);
@@ -273,3 +274,109 @@ document.getElementById('searchForm')?.addEventListener('submit', function(e) {
   const q = document.getElementById('inputModalSearch').value;
   window.location.href = 'shop.html?q=' + encodeURIComponent(q);
 });
+
+const searchInput = document.getElementById('inputModalSearch');
+if (searchInput) {
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const options = document.querySelectorAll('#searchSuggestions option');
+    options.forEach(option => {
+      if (option.value.toLowerCase().includes(query)) {
+        option.style.display = '';
+      } else {
+        option.style.display = 'none';
+      }
+    });
+  });
+}
+
+const filtro = document.querySelector('.filter');
+if (filtro) {
+  filtro.innerHTML = 'Mostrar Filtros <i class="fa-solid fa-sliders" ></i> ';
+  let isHidden = true; 
+  filtro.addEventListener('click', () => {
+    const sidebar = document.querySelector('.col-lg-3');
+    if (sidebar) {
+      isHidden = !isHidden;
+      sidebar.style.display = isHidden ? 'none' : 'block';
+      filtro.innerHTML = '<i class="fa-solid fa-sliders" style="color: rgb(6, 6, 6);"></i> ' + (isHidden ? 'Mostrar Filtros' : 'Ocultar Filtros');
+    }
+  });
+}
+
+
+const formatPrice = (value) => {
+  return Number(value).toLocaleString("es-PA");
+}
+
+let shopProducts = [];
+
+function initPriceFilter(items) {
+  const rangeInput = document.querySelectorAll(".range-input input");
+  const progress = document.querySelector(".progress");
+  const minPrice = document.getElementById("min-price");
+  const maxPrice = document.getElementById("max-price");
+  if (!rangeInput.length || !progress || !minPrice || !maxPrice) return;
+
+  shopProducts = Array.isArray(items) ? items.slice() : [];
+  if (!shopProducts.length) return;
+
+  const prices = shopProducts.map(product => Number(product.price) || 0);
+  const minValue = Math.min(...prices);
+  const maxValue = Math.max(...prices);
+
+  rangeInput[0].min = minValue;
+  rangeInput[0].max = maxValue;
+  rangeInput[0].step = 1;
+  rangeInput[0].value = minValue;
+
+  rangeInput[1].min = minValue;
+  rangeInput[1].max = maxValue;
+  rangeInput[1].step = 1;
+  rangeInput[1].value = maxValue;
+
+  minPrice.textContent = formatPrice(minValue);
+  maxPrice.textContent = formatPrice(maxValue);
+  progress.style.left = (minValue / rangeInput[0].max) * 100 + "%";
+  progress.style.right = 100 - (maxValue / rangeInput[1].max) * 100 + "%";
+
+  const minGap = Number(rangeInput[0].step) || 1;
+
+  rangeInput.forEach(input => {
+    input.addEventListener("input", () => {
+      let minVal = parseInt(rangeInput[0].value, 10);
+      let maxVal = parseInt(rangeInput[1].value, 10);
+      const minBound = Number(rangeInput[0].min) || 0;
+      const maxBound = Number(rangeInput[1].max) || maxVal;
+
+      if (maxVal - minVal < minGap) {
+        if (input.classList.contains("range-min")) {
+          minVal = Math.max(maxVal - minGap, minBound);
+          rangeInput[0].value = minVal;
+        } else {
+          maxVal = Math.min(minVal + minGap, maxBound);
+          rangeInput[1].value = maxVal;
+        }
+      }
+
+      minVal = Math.max(minVal, minBound);
+      maxVal = Math.min(maxVal, maxBound);
+
+      progress.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+      progress.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+      minPrice.innerText = formatPrice(minVal);
+      maxPrice.innerText = formatPrice(maxVal);
+      filterProductsByPrice(minVal, maxVal);
+    });
+  });
+
+  filterProductsByPrice(minValue, maxValue);
+}
+
+function filterProductsByPrice(minVal, maxVal) {
+  const filtered = shopProducts.filter(product => {
+    const price = Number(product.price);
+    return price >= minVal && price <= maxVal;
+  });
+  mostrarProductos(filtered);
+}

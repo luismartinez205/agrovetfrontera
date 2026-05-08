@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Search button and input handlers for navbar search
   const searchInputNavbar = document.getElementById('searchInputNavbar');
   const searchButtonNavbar = document.getElementById('searchButtonNavbar');
+  const resetButtonNavbar = document.getElementById('resetButtonNavbar');
   const searchCategoryDropdown = document.getElementById('searchCategory');
+  const inputMobileSearch = document.getElementById('inputMobileSearch');
   
   // Handle navbar search form submission
   if (searchButtonNavbar) {
@@ -21,11 +23,28 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  if (resetButtonNavbar) {
+    resetButtonNavbar.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (searchInputNavbar) searchInputNavbar.value = '';
+      if (inputMobileSearch) inputMobileSearch.value = '';
+      if (searchCategoryDropdown) searchCategoryDropdown.selectedIndex = 0;
+      if (window.location.pathname.endsWith('shop.html')) {
+        window.location.href = 'shop.html';
+      }
+    });
+  }
   
   function performSearch() {
     const query = searchInputNavbar?.value.trim();
+    const category = searchCategoryDropdown?.value.trim();
     if (query) {
-      window.location.href = 'shop.html?q=' + encodeURIComponent(query);
+      let url = 'shop.html?q=' + encodeURIComponent(query);
+      if (category) {
+        url += '&category=' + encodeURIComponent(category);
+      }
+      window.location.href = url;
     }
   }
   

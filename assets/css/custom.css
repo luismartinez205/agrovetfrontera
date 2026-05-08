@@ -1,6 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+
+
 /*
 Custom Css
 */
+body {
+  font-family: "Google Sans Flex", sans-serif ;
+}
+
 .img-logo {
     width: 70px;
     height: auto;
@@ -103,6 +111,23 @@ Custom Css
     text-align: center;
     }
 
+    .brand-filter{
+      width:243px;
+      padding:25px;
+      border-radius:10px;
+      margin-top: 20px;
+    }
+
+    .brand-filter h3{
+      margin-bottom: 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .brand-filter select{
+      width: 100%;
+    }
+
     .slider{
       position:relative;
       height:6px;
@@ -149,3 +174,32 @@ Custom Css
       color:#777;
       font-size:18px;
     }
+
+#featured .card-body a.h2 {
+  font-size: 1.25rem;
+}
+
+
+body {
+  
+  font-optical-sizing: auto;
+}
+
+.modal-content {
+  background-image: url('../img/perro-convertido-a-mediano.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+.modal.fade .modal-dialog {
+  transform: translateX(100px);
+  transition: .3s;
+}
+
+.modal.show .modal-dialog {
+  transform: translateX(0);
+}
+
+.translate-user {
+      transform: translate(658%,86%)!important;
+}
